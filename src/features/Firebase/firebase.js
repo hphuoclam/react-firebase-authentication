@@ -1,6 +1,8 @@
-import app from 'firebase/app';
+// import app from 'firebase/app';
+import * as app from "firebase";
 import 'firebase/auth';
 import 'firebase/database';
+import * as STORAGE from '../../constants/storage';
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -24,6 +26,7 @@ class Firebase {
 
     this.auth = app.auth();
     this.db = app.database();
+    this.storage = app.storage();
 
     /* Social Sign In Method Provider */
 
@@ -66,17 +69,17 @@ class Firebase {
   onAuthUserListener = (next, fallback) =>
     this.auth.onAuthStateChanged(authUser => {
       if (authUser) {
-        
         this.user(authUser.uid)
           .once('value')
           .then(snapshot => {
+            console.log("=================", snapshot.val())
             // let dbUser = snapshot.val();
 
             // default empty roles
             // if (dbUser || (dbUser && !dbUser.roles)) {
             //   dbUser.roles = {};
             // }
-            
+
             // merge auth and db user
             authUser = {
               uid: authUser.uid,
@@ -96,6 +99,8 @@ class Firebase {
   // *** User API ***
 
   user = uid => this.db.ref(`users/${uid}`);
+
+  uploadUserAvatar = uid => this.storage.ref(`${STORAGE.AVATARS}/${uid}`);
 
   users = () => this.db.ref('users');
 
