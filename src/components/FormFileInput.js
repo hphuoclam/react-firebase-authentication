@@ -30,9 +30,26 @@ import { UploadOutlined } from '@ant-design/icons';
 // };
 
 class FormFileInput extends React.Component {
+
   state = {
     fileList: [],
   };
+
+  componentDidMount(){
+    const { field: { name, value } } = this.props;
+    if(value){
+      this.setState({
+        fileList: [
+          {
+            uid: '-1',
+            name: name,
+            status: 'done',
+            url: value,
+          }
+        ],
+      })
+    }
+  }
 
   componentWillUpdate(nextProps, nextState) {
     const { fileList } = this.state;
@@ -46,6 +63,7 @@ class FormFileInput extends React.Component {
     const { fileList } = this.state;
     const { field, form: { setFieldValue }, selectLimit, placeholder } = this.props;
     const props = {
+      listType: 'picture',
       onRemove: file => {
         this.setState(state => {
           const index = state.fileList.indexOf(file);

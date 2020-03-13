@@ -72,7 +72,7 @@ class Firebase {
         this.user(authUser.uid)
           .once('value')
           .then(snapshot => {
-            console.log("=================", snapshot.val())
+            // console.log("=================", snapshot.val())
             // let dbUser = snapshot.val();
 
             // default empty roles
@@ -115,6 +115,8 @@ class Firebase {
   blog = uid => this.db.ref(`blogs/${uid}`);
 
   blogs = () => this.db.ref('blogs');
+
+  uploadBlogPhoto = uid => this.storage.ref(`${STORAGE.BLOGS}/${uid}`);
 }
 
 export default Firebase;

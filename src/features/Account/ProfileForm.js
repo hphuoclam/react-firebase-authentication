@@ -18,6 +18,7 @@ const validationSchema = Yup.object().shape({
 const initialValues = {
   fullName: '',
   summary: '',
+  avatar: null
 }
 
 const fields = [
@@ -59,21 +60,12 @@ class ProfileForm extends Component {
       error: null,
       initialValues: {
         ...initialValues,
+        fullName: props.authUser.fullName,
+        summary: props.authUser.summary,
+        email: props.authUser.email,
+        avatar: props.authUser.avatar,
       }
     };
-  }
-
-  componentDidMount() {
-    const { authUser } = this.props;
-    this.setState({
-      initialValues: {
-        ...initialValues,
-        fullName: authUser.fullName,
-        summary: authUser.summary,
-        email: authUser.email,
-        roles: authUser.roles
-      }
-    });
   }
 
   onSubmit = (values) => {
@@ -87,13 +79,17 @@ class ProfileForm extends Component {
         this.saveProfile(values);
       })
     } else {
+      delete values.avatar;
+
       this.saveProfile(values);
     }
   };
 
   saveProfile = datas => {
     const { authUser, firebase } = this.props;
-    firebase.user(authUser.uid).set(datas);
+    firebase.user(authUser.uid).update(datas).then(() => {
+      authUser.updateGlobalProfile();
+    });
   }
 
   uploadAvatar = (avatar) => {

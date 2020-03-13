@@ -6,6 +6,7 @@ import { withFirebase } from '../Firebase';
 const needsEmailVerification = authUser =>
   authUser &&
   !authUser.emailVerified &&
+  authUser.providerData &&
   authUser.providerData
     .map(provider => provider.providerId)
     .includes('password');
