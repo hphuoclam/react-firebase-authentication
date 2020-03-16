@@ -107,7 +107,7 @@ class SignUpFormBase extends Component {
 
     return (
       <form onSubmit={this.onSubmit} className="mb-3">
-        <div className="form-group" className="mb-3">
+        <div className="form-group mb-3">
           <label htmlFor="exampleInputEmail1">Full Name</label>
           <Input
             name="fullName"
@@ -117,7 +117,7 @@ class SignUpFormBase extends Component {
             placeholder="Full Name"
           />
         </div>
-        <div className="form-group" className="mb-3">
+        <div className="form-group mb-3">
           <label htmlFor="exampleInputEmail1">Email Address</label>
           <Input
             name="email"
@@ -127,7 +127,7 @@ class SignUpFormBase extends Component {
             placeholder="Email Address"
           />
         </div>
-        <div className="form-group" className="mb-3">
+        <div className="form-group mb-3">
           <label htmlFor="exampleInputEmail1">Password</label>
           <Input
             name="passwordOne"
@@ -137,7 +137,7 @@ class SignUpFormBase extends Component {
             placeholder="Password"
           />
         </div>
-        <div className="form-group" className="mb-3">
+        <div className="form-group mb-3">
           <label htmlFor="exampleInputEmail1">Confirm Password</label>
           <Input
             name="passwordTwo"

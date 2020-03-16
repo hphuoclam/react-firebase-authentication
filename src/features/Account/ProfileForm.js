@@ -70,7 +70,7 @@ class ProfileForm extends Component {
 
   onSubmit = (values) => {
     const { avatar } = values;
-    const { authUser } = this.props;
+    // const { authUser } = this.props;
     if (avatar && isArray(avatar) && avatar.length > 0) {
       this.uploadAvatar(avatar[0]).then(url => {
         if (url) {

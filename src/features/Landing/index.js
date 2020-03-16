@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { List, Avatar, Button, Skeleton, PageHeader } from 'antd';
+import { List, Avatar, Skeleton } from 'antd';
 import { compose } from 'recompose';
 import moment from 'moment';
 
@@ -36,6 +36,7 @@ class Landing extends Component {
               uid: key,
             });
           });
+          return blogsObject;
         })
         this.setState({
           blogs: blogsList,

@@ -1,4 +1,3 @@
-import Navigation from '../Navigation';
 import LandingPage from '../Landing';
 import SignUpPage from '../SignUp';
 import SignInPage from '../SignIn';

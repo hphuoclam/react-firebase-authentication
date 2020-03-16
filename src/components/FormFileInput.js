@@ -1,7 +1,7 @@
 //@flow
-import React, { useState } from 'react';
-import { Input, Typography } from 'antd';
-import { Upload, Button, message } from 'antd';
+import React from 'react';
+// import { Input, Typography } from 'antd';
+import { Upload, Button } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 
 // const FormFileInput = ({
@@ -61,7 +61,7 @@ class FormFileInput extends React.Component {
 
   render() {
     const { fileList } = this.state;
-    const { field, form: { setFieldValue }, selectLimit, placeholder } = this.props;
+    const { selectLimit, placeholder } = this.props;
     const props = {
       listType: 'picture',
       onRemove: file => {

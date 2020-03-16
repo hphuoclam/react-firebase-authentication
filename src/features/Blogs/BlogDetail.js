@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { get } from "lodash";
 import moment from "moment";
+import { compose } from "recompose"
 
+import { withTitle } from '../Session';
 import { withFirebase } from '../Firebase';
+
+import "./BlogDetail.scss"
 
 class BlogDetail extends Component {
   constructor(props) {
@@ -15,11 +19,12 @@ class BlogDetail extends Component {
   }
 
   componentDidMount() {
-    const { firebase } = this.props
+    const { firebase, setPageTitle } = this.props
     this.setState({ loading: true });
     firebase.blog(this.props.match.params.id)
       .on('value', snapshot => {
         let blog = snapshot.val();
+        setPageTitle(blog.title);
         firebase.user(blog.createBy).on('value', snapshot1 => {
           blog.createBy = { uid: blog.createBy, ...snapshot1.val() };
           this.setState({
@@ -36,22 +41,21 @@ class BlogDetail extends Component {
 
   renderBlog() {
     const { blog } = this.state;
-    console.log('=-=-blog', blog)
     return (
       <div>
-        <h1>
+        <h1 className="title">
           {blog.title}
         </h1>
-        <div>
+        <div className="time">
           {moment(blog.createdAt).fromNow()}
         </div>
-        <h3>
+        <h4 className="subTitle">
           {blog.subTitle}
-        </h3>
-        <div>
+        </h4>
+        <div className="description">
           {blog.description}
         </div>
-        <div className="text-right">
+        <div className="author">
           {get(blog, "createBy.fullName")}
         </div>
       </div>
@@ -62,7 +66,7 @@ class BlogDetail extends Component {
     const { blog, loading } = this.state;
 
     return (
-      <div className="container bg-white pt-5 pb-5">
+      <div className="container bg-white pt-5 pb-5 BlogDetail">
         {loading && <div>Loading ...</div>}
 
         {blog && this.renderBlog()}
@@ -71,4 +75,7 @@ class BlogDetail extends Component {
   }
 }
 
-export default withFirebase(BlogDetail);
+export default compose(
+  withFirebase,
+  withTitle
+)(BlogDetail);

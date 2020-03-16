@@ -5,12 +5,12 @@ import { Menu } from 'antd';
 
 import { withAuthorization, withEmailVerification } from '../Session';
 import { UserList, UserItem } from '../Users';
-import { BlogList, BlogItem, BlogForm } from '../Blogs';
+import { BlogList, BlogForm } from '../Blogs';
 import Home from './home';
 import * as ROLES from '../../constants/roles';
 import * as ROUTES from '../../constants/routes';
 
-const { SubMenu } = Menu;
+// const { SubMenu } = Menu;
 
 const AdminPage = () => {
   return (

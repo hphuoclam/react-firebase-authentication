@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { List, Avatar, Button, Skeleton, PageHeader } from 'antd';
+import { List, Avatar, Skeleton, PageHeader } from 'antd';
 
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
@@ -39,7 +39,6 @@ class UserList extends Component {
 
   render() {
     const { users, loading } = this.state;
-    console.log('=-=-users', users)
     return (
       <div>
         <PageHeader
