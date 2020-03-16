@@ -48,8 +48,10 @@ const withAuthentication = Component => {
     }
 
     render() {
+      const { authUser } = this.state;
+      const newAuthUser = authUser && { ...this.state.authUser, updateGlobalProfile: this.updateGlobalProfile };
       return (
-        <AuthUserContext.Provider value={{ ...this.state.authUser, updateGlobalProfile: this.updateGlobalProfile }}>
+        <AuthUserContext.Provider value={newAuthUser}>
           <Component {...this.props} />
         </AuthUserContext.Provider>
       );
