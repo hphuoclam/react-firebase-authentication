@@ -22,15 +22,16 @@ class BlogList extends Component {
     this.setState({ loading: true });
 
     firebase.blogs()
+      // .orderByChild('updatedAt')
       .orderByChild('createBy')
       .equalTo(authUser.uid)
       .on('value', snapshot => {
         const blogsObject = snapshot.val();
 
-        const blogsList = Object.keys(blogsObject).map(key => ({
+        const blogsList = blogsObject ? Object.keys(blogsObject).map(key => ({
           ...blogsObject[key],
           uid: key,
-        }));
+        })) : [];
 
         this.setState({
           blogs: blogsList,

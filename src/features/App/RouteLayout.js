@@ -5,7 +5,6 @@ import { withTitle } from "../Session"
 
 const RouteLayout = (props) => {
   useEffect(() => {
-    console.log('RouteLayout', props)
     props.setPageTitle && props.setPageTitle(props.title)
   }, [props.title])
 

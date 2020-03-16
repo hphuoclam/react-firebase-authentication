@@ -1,5 +1,5 @@
 import BlogList from './BlogList';
-import BlogItem from './BlogItem';
+import BlogDetail from './BlogDetail';
 import BlogForm from './BlogForm';
 
-export { BlogList, BlogItem, BlogForm };
+export { BlogList, BlogDetail, BlogForm };

@@ -7,6 +7,9 @@ import { compose } from 'recompose';
 
 import { withCurrentUser } from '../Session';
 import { withFirebase } from '../Firebase';
+import { blogInitial } from "./models";
+import * as ROUTES from '../../constants/routes';
+
 import Button from "../../components/button";
 import FormInput from "../../components/FormInput";
 import FormTextArea from "../../components/FormTextArea";
@@ -18,15 +21,6 @@ const validationSchema = Yup.object().shape({
   subTitle: Yup.string().required("Required"),
   description: Yup.string().required("Required"),
 });
-
-const initialValues = {
-  title: '',
-  subTitle: '',
-  description: '',
-  photo: null,
-  isPublic: true,
-  active: false,
-}
 
 const fields = [
   {
@@ -67,7 +61,7 @@ class BlogForm extends Component {
       error: null,
       disabledButton: false,
       initialValues: {
-        ...initialValues,
+        ...blogInitial,
       }
     };
   }
@@ -88,10 +82,12 @@ class BlogForm extends Component {
           if (url) {
             firebase.blog(uuid).update({ photo: url });
             this.setState({ disabledButton: false });
+            this.props.history.push(ROUTES.ADMIN_BLOGS)
           }
         })
       } else {
         this.setState({ disabledButton: false });
+        this.props.history.push(ROUTES.ADMIN_BLOGS)
       }
     });
   };
@@ -113,7 +109,7 @@ class BlogForm extends Component {
 
   render() {
     const { error, initialValues, disabledButton } = this.state;
-
+    console.log('=-=-initialValues', initialValues)
     return (
       <div>
         <Formik

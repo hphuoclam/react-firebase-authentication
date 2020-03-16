@@ -6,6 +6,7 @@ import PasswordForgetPage from '../PasswordForget';
 import HomePage from '../Home';
 import AccountPage from '../Account';
 import AdminPage from '../Admin';
+import { BlogDetail } from '../Blogs';
 
 import * as ROUTES from '../../constants/routes';
 
@@ -44,6 +45,11 @@ const routes = [
     {
         path: ROUTES.ADMIN,
         component: AdminPage,
+        title: "Admin"
+    },
+    {
+        path: `${ROUTES.BLOG}/:id`,
+        component: BlogDetail,
         title: "Admin"
     },
 
